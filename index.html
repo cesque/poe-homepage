@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>poe ritual league</title>
+    <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./style.scss">
+    <script defer src="./script.js"></script>
+</head>
+<body>
+    <div class="app">
+        <div class="container" v-bind:style="containerStyle">
+            <a
+                class="item"
+                v-for="(link, index) in links"
+                v-bind:href="link.href"
+                v-bind:style="style(link, index)"
+                v-bind:class="{ 'item--large': link.big }"
+            >
+                {{ link.title }}
+            </a>
+            <div v-for="(_, i) in empty" class="item item--empty">
+                <span v-if="i == empty - 1">page by <a href="https://cesque.com">cesque</a> ☺️</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
