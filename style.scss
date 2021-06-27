@@ -45,7 +45,8 @@ img.emoji {
     padding: 40px;
     grid-column: span 1;
     position: relative;
-    max-height: 400px;
+    height: 100vh;
+    max-height: 200px;
 
     text-decoration: none;
     text-align: center;
