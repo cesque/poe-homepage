@@ -13,7 +13,8 @@
   "name": "poe-homepage",
   "version": "1.0.0",
   "scripts": {
-    "build": "parcel build index.html && copyfiles manifest.json dist"
+    "build": "parcel build index.html && copyfiles manifest.json dist",
+    "start": "parcel index.html"
   },
   "author": "",
   "license": "ISC",
