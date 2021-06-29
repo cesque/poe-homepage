@@ -58,6 +58,10 @@ let app = new Vue({
                     href: `https://jisho.org/`,
                     title: `jisho`,
                 },
+                {
+                    href: `https://monolith.cesque.dev/ghost`,
+                    title: `ghost`
+                },
             ]
         }
     },
