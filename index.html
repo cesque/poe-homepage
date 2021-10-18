@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>poe ritual league</title>
+    <title>new tab~</title>
     <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.scss">
     <script defer src="./script.js"></script>
@@ -19,10 +19,16 @@
                 v-bind:style="style(link, index)"
                 v-bind:class="{ 'item--large': link.big }"
             >
-                {{ link.title }}
+                <div class="indicator"><div class="indicator-bar"></div></div>
+                <div class="content">
+                    {{ link.title }}
+                </div>
             </a>
-            <div v-for="(_, i) in empty" class="item item--empty">
+            <!-- <div v-for="(_, i) in empty" class="item item--empty">
                 <span v-if="i == empty - 1">page by <a href="https://cesque.com">cesque</a> ☺️</span>
+            </div> -->
+            <div class="item item--empty" v-bind:style="{ 'grid-column': `span ${empty}` }">
+                <span>page by <a href="https://cesque.com" v-bind:style="{ color: randomColor }">cesque</a> ☺️</span>
             </div>
         </div>
     </div>
