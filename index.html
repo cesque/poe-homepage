@@ -31,6 +31,74 @@
                 <span>page by <a href="https://cesque.com" v-bind:style="{ color: randomColor }">cesque</a> ☺️</span>
             </div>
         </div>
+
+        <button type="button" class="settings-button" v-on:click="openSettings()">⚙️</button>
+
+        <div class="settings-overlay" v-if="isSettingsVisible" v-on:click="closeSettings($event)">
+            <div class="settings">
+                <div class="settings-close" v-on:click="closeSettings($event, true)">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" version="1.1" style="shape-rendering:geometricPrecision;text-rendering:geometricPrecision;image-rendering:optimizeQuality;" viewBox="0 0 333 333" x="0px" y="0px" fill-rule="evenodd" clip-rule="evenodd">
+                        <g>
+                            <path fill="currentColor" d="M319 45l-123 122 123 122c19,19 -11,49 -30,30l-122 -123 -122 123c-20,19 -50,-11 -30,-30l122 -122 -122 -122c-20,-20 10,-50 30,-30l122 122 122 -122c19,-20 49,10 30,30z"/>
+                        </g>
+                    </svg>
+                </div>
+
+                <p>
+                    You can edit the blocks on your homepage here by changing
+                    their titles, URLs, and block sizes. You can also drag the
+                    blocks to reorder them. Click the save button at the bottom
+                    to save your changes so they persist when you close the tab.
+                </p>
+
+                <button type="button" class="settings-new" v-on:click="addBlock()">New</button>
+
+                <div class="settings-links">
+                    <template v-for="(item, index) in settingsLinks">
+                        <div class="settings-link"
+                            draggable
+                            v-if="item.type == 'link'"
+                            v-bind:data-index="item.index"
+                            v-bind:class="{ dragged: item.link.dragged }"
+                            v-on:dragstart="settingsDragStart(item.link)"
+                            v-on:dragend="settingsDragEnd(item.link)"
+                            v-on:drop="settingsDragDrop($event)"
+                        >
+                            <div class="settings-link__column settings-link__column--1">
+                                <input class="settings-link__input settings-link__input--title" type="text" v-model="item.link.title" placeholder="text">
+                                <input class="settings-link__input settings-link__input--link" type="text" v-model="item.link.href" placeholder="https://www.example.com">
+                            </div>
+                            <div class="settings-link__column settings-link__column--2">
+                                <button type="button" class="settings-link__delete" v-on:click="deleteBlock(item.index)">Delete</button>
+                                
+                                <div class="settings-link__checkbox-with-label">
+                                    <label class="settings-link__checkbox-label" v-bind:for="`size-checkbox-` + index">Size:</label>
+                                    <div class="settings-link__checkbox-container">
+                                        <input type="checkbox"
+                                            class="settings-link__checkbox"
+                                            v-bind:id="`size-checkbox-` + index"
+                                            v-model="item.link.big"
+                                        >
+                                        <div class="settings-link__checkbox-inner">{{ item.link.big ? '2' : '1' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="settings-link__drop-target"
+                            v-if="item.type == 'drop-target'"
+                            v-bind:data-index="item.index"
+                            v-bind:class="{ active: isDragging, 'dragged-over': isDragging && dropTargetIndex == item.index }"
+                            v-on:dragenter="settingsDragEnter($event, item.index)"
+                            v-on:dragover="settingsDragOver($event, item.index)"
+                            v-on:dragLeave="settingsDragLeave($event, item.index)"
+                        ></div>
+                    </template>
+                </div>
+
+                <button type="button" class="settings-save" v-on:click="saveSettings(); closeSettings($event, true)">Save</button>
+            </div>
+        </div>
     </div>
 </body>
 </html>
