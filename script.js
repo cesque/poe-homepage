@@ -4,6 +4,10 @@ let links = localStorage.getItem('links')
 console.log(links)
 try {
     links = JSON.parse(links)
+
+    if(!links) {
+        throw `links in null or empty`
+    }
 } catch(e) {
     console.warn(e)
     console.warn('links from local storage not found, resetting to defaults: ')
