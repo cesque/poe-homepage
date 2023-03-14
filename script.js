@@ -124,7 +124,8 @@ let app = new Vue({
 
                 result.push({
                     type: 'link',
-                    link: this.links[i]
+                    link: this.links[i],
+                    index: i,
                 })
             }
 
